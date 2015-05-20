@@ -5,11 +5,44 @@
 
     <parameters>
         <parameter key="catchamonkey_assetic_filter.cssmin.class">Catchamonkey\Bundle\AsseticFilterBundle\Assetic\Filter\CssMinFilter</parameter>
+        <parameter key="catchamonkey_assetic_filter.uglify.class">Catchamonkey\Bundle\AsseticFilterBundle\Assetic\Filter\UglifyFilter</parameter>
+
+        <parameter key="catchamonkey_assetic_filter.uglify.bin">%kernel.root_dir%/Resources/node_modules/.bin/uglifyjs</parameter>
+        <parameter key="catchamonkey_assetic_filter.uglify.node">%assetic.node.bin%</parameter>
+        <parameter key="catchamonkey_assetic_filter.uglify.timeout">null</parameter>
+        <parameter key="catchamonkey_assetic_filter.uglify.node_paths">%assetic.node.paths%</parameter>
+        <parameter key="catchamonkey_assetic_filter.uglify.compress">false</parameter>
+        <parameter key="catchamonkey_assetic_filter.uglify.beautify">false</parameter>
+        <parameter key="catchamonkey_assetic_filter.uglify.mangle">false</parameter>
+        <parameter key="catchamonkey_assetic_filter.uglify.screw_ie8">false</parameter>
+        <parameter key="catchamonkey_assetic_filter.uglify.comments">false</parameter>
+        <parameter key="catchamonkey_assetic_filter.uglify.wrap">false</parameter>
+        <parameter key="catchamonkey_assetic_filter.uglify.defines" type="collection"></parameter>
+        <parameter key="catchamonkey_assetic_filter.uglify.source_map">true</parameter>
+
     </parameters>
 
     <services>
         <service id="assetic.filter.catchamonkey_cssmin" class="%catchamonkey_assetic_filter.cssmin.class%">
             <tag name="assetic.filter" alias="catchamonkey_cssmin"></tag>
+        </service>
+
+        <service id="assetic.filter.catchamonkey_uglify" class="%catchamonkey_assetic_filter.uglify.class%">
+            <tag name="assetic.filter" alias="catchamonkey_uglify"></tag>
+
+            <argument>%catchamonkey_assetic_filter.uglify.bin%</argument>
+            <argument>%catchamonkey_assetic_filter.uglify.node%</argument>
+            <call method="setTimeout"><argument>%catchamonkey_assetic_filter.uglify.timeout%</argument></call>
+            <call method="setNodePaths"><argument>%catchamonkey_assetic_filter.uglify.node_paths%</argument></call>
+            <call method="setCompress"><argument>%catchamonkey_assetic_filter.uglify.compress%</argument></call>
+            <call method="setBeautify"><argument>%catchamonkey_assetic_filter.uglify.beautify%</argument></call>
+            <call method="setMangle"><argument>%catchamonkey_assetic_filter.uglify.mangle%</argument></call>
+            <call method="setScrewIe8"><argument>%catchamonkey_assetic_filter.uglify.screw_ie8%</argument></call>
+            <call method="setComments"><argument>%catchamonkey_assetic_filter.uglify.comments%</argument></call>
+            <call method="setWrap"><argument>%catchamonkey_assetic_filter.uglify.wrap%</argument></call>
+            <call method="setDefines"><argument>%catchamonkey_assetic_filter.uglify.defines%</argument></call>
+            <call method="setSourceMap"><argument>%catchamonkey_assetic_filter.uglify.source_map%</argument></call>
+
         </service>
     </services>
 
